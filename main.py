@@ -1,6 +1,6 @@
 import pygame
 import window
 
-#startet das Fenster
+#start window
 window.create_window()
 
