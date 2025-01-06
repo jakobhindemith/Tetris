@@ -1,9 +1,9 @@
 import pygame
+import tetris
 
 def draw_grid(surface):
-    """Zeichnet ein Gitter auf die gegebene pygame-Surface."""
-    for x in range(0, 400, 40):  #gridsize 20x20 Pixel width
-        for y in range(0, 600, 40): #gridsize 20x20 Pixel height
+    for x in range(0, 400, 40):  #width
+        for y in range(0, 600, 40): #height
             pygame.draw.rect(surface, ("white"), (x, y, 40, 40), 1)  #Gitterlinien
 
 def create_window():
@@ -21,6 +21,10 @@ def create_window():
     #set display
     pygame.display.flip()
     
+    #tetromino initialize
+    tetris.tetromino(screen, 200, 200)
+
+
     # Event-Loop
     running = True
     while running:
