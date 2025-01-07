@@ -1,5 +1,7 @@
 import pygame
 import tetris
+import time
+import random
 
 def draw_grid(surface):
     for x in range(0, 400, 40):  #width
@@ -7,6 +9,8 @@ def draw_grid(surface):
             pygame.draw.rect(surface, ("white"), (x, y, 40, 40), 1)  #Gitterlinien
 
 def create_window():
+    i = 0
+
     pygame.init()
     pygame.display.set_caption("Tetris")
     
@@ -22,8 +26,9 @@ def create_window():
     pygame.display.flip()
     
     #tetromino initialize
-    tetris.tetromino(screen, 200, 200)
-
+    while i < 10:
+        tetris.tetromino(screen, random.randint(40, 380), 0)
+    i = i + 1
 
     # Event-Loop
     running = True
