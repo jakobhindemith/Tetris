@@ -26,9 +26,9 @@ def create_window():
     pygame.display.flip()
     
     #tetromino initialize
-    while i < 10:
-        tetris.tetromino(screen, random.randint(40, 380), 0)
-    i = i + 1
+    while i < 4:
+        tetris.tetromino(screen, random.randint(0, 360), 0)
+        i = i + 1
 
     # Event-Loop
     running = True
