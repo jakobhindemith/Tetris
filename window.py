@@ -20,19 +20,14 @@ def create_window():
     #set display
     pygame.display.flip()
     
-
-    #tetromino initialize
-    #tetris.tetromino(screen, random.randint(40, 360), 0)
-
+    
     #Event-Loop
     running = True
     while running:
+        tetris.tetromino(screen, random.randint(40, 360), 0)
         for event in pygame.event.get():
-            #tetromino initialize
-            tetris.tetromino(screen, random.randint(40, 360), 0)
-
+        #tetromino initialize
             if event.type == pygame.QUIT:
                 running = False
-    
     pygame.quit()
 
