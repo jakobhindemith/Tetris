@@ -4,6 +4,3 @@ import tetris
 
 #start window
 window.create_window()
-
-
-
