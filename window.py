@@ -9,34 +9,25 @@ def draw_grid(surface):
             pygame.draw.rect(surface, ("white"), (x, y, 40, 40), 1)  #Gitterlinien
 
 def create_window():
-    i = 0
 
     pygame.init()
     pygame.display.set_caption("Tetris")
-    
     #screen size
     screen = pygame.display.set_mode((400, 600))
-    
     # Background
     screen.fill(("black"))
-    
     draw_grid(screen)
-    
     #set display
     pygame.display.flip()
     
-    #tetromino initialize
-    #tetris.tetromino(screen, random.randint(40, 360), 0)
-
-    # Event-Loop
+    
+    #Event-Loop
     running = True
     while running:
+        tetris.tetromino(screen, random.randint(40, 360), 0)
         for event in pygame.event.get():
-            #tetromino initialize
-            tetris.tetromino(screen, random.randint(40, 360), 0)
-
+        #tetromino initialize
             if event.type == pygame.QUIT:
                 running = False
-    
     pygame.quit()
 
