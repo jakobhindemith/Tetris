@@ -10,19 +10,22 @@ shapes = ['I','O','T','L','Z']
 #define the pricks
 def tetromino(screen, x, y):
     i = 0
+    right = 0
+    left = 0
     #random shape
     shape = random.choice(shapes)
-    print(shape)
-     
+    print(shape)    
     #drawing the tetromino
     match shape:
         case 'I':
-            #for i in range(440):
             while i <= 440:
-                pygame.draw.rect(screen, ("green"), (x, y+i, 40, 40))
-                pygame.draw.rect(screen, ("green"), (x, y+40+i, 40, 40))
-                pygame.draw.rect(screen, ("green"), (x, y+80+i, 40, 40))
-                pygame.draw.rect(screen, ("green"), (x, y+120+i, 40, 40))
+                right = window.get_counter_right()
+                left = window.get_counter_left()
+                window.update()
+                pygame.draw.rect(screen, ("green"), (x+(right)-(left), y+i, 40, 40))
+                pygame.draw.rect(screen, ("green"), (x+(right)-(left), y+40+i, 40, 40))
+                pygame.draw.rect(screen, ("green"), (x+(right)-(left), y+80+i, 40, 40))
+                pygame.draw.rect(screen, ("green"), (x+(right)-(left), y+120+i, 40, 40))
                 pygame.display.flip()
                 screen.fill(("black"))
                 window.draw_grid(screen)
@@ -30,10 +33,13 @@ def tetromino(screen, x, y):
                 i = i + 10  
         case 'O':
             while i <= 520:
-                pygame.draw.rect(screen, ("orange"), (x, y+i, 40, 40))
-                pygame.draw.rect(screen, ("orange"), (x, y+40+i, 40, 40))
-                pygame.draw.rect(screen, ("orange"), (x+40, y+i, 40, 40))
-                pygame.draw.rect(screen, ("orange"), (x+40, y+40+i, 40, 40))
+                right = window.get_counter_right()
+                left = window.get_counter_left()
+                window.update()
+                pygame.draw.rect(screen, ("orange"), (x+(right)-(left), y+i, 40, 40))
+                pygame.draw.rect(screen, ("orange"), (x+(right)-(left), y+40+i, 40, 40))
+                pygame.draw.rect(screen, ("orange"), (x+40+(right)-(left), y+i, 40, 40))
+                pygame.draw.rect(screen, ("orange"), (x+40+(right)-(left), y+40+i, 40, 40))
                 pygame.display.flip()
                 screen.fill(("black"))
                 window.draw_grid(screen)
@@ -41,10 +47,13 @@ def tetromino(screen, x, y):
                 i = i + 10
         case 'T':
             while i <= 520:
-                pygame.draw.rect(screen, ("red"), (x, y+i, 40, 40))
-                pygame.draw.rect(screen, ("red"), (x+40, y+i, 40, 40))
-                pygame.draw.rect(screen, ("red"), (x+80, y+i, 40, 40))
-                pygame.draw.rect(screen, ("red"), (x+40, y+40+i, 40, 40))
+                right = window.get_counter_right()
+                left = window.get_counter_left()
+                window.update()
+                pygame.draw.rect(screen, ("red"), (x+(right)-(left), y+i, 40, 40))
+                pygame.draw.rect(screen, ("red"), (x+40+(right)-(left), y+i, 40, 40))
+                pygame.draw.rect(screen, ("red"), (x+80+(right)-(left), y+i, 40, 40))
+                pygame.draw.rect(screen, ("red"), (x+40+(right)-(left), y+40+i, 40, 40))
                 time.sleep(0.05)
                 pygame.display.flip()
                 screen.fill(("black"))
@@ -52,10 +61,13 @@ def tetromino(screen, x, y):
                 i = i + 10
         case 'L':
             while i <= 480:
-                pygame.draw.rect(screen, ("blue"), (x, y+i, 40, 40))
-                pygame.draw.rect(screen, ("blue"), (x, y+40+i, 40, 40))
-                pygame.draw.rect(screen, ("blue"), (x, y+80+i, 40, 40))
-                pygame.draw.rect(screen, ("blue"), (x+40, y+80+i, 40, 40))
+                right = window.get_counter_right()
+                left = window.get_counter_left()
+                window.update()
+                pygame.draw.rect(screen, ("blue"), (x+(right)-(left), y+i, 40, 40))
+                pygame.draw.rect(screen, ("blue"), (x+(right)-(left), y+40+i, 40, 40))
+                pygame.draw.rect(screen, ("blue"), (x+(right)-(left), y+80+i, 40, 40))
+                pygame.draw.rect(screen, ("blue"), (x+40+(right)-(left), y+80+i, 40, 40))
                 time.sleep(0.05)
                 pygame.display.flip()
                 screen.fill(("black"))
@@ -63,10 +75,13 @@ def tetromino(screen, x, y):
                 i = i + 10
         case 'Z':
             while i <= 520:
-                pygame.draw.rect(screen, ("yellow"), (x, y+i, 40, 40))
-                pygame.draw.rect(screen, ("yellow"), (x+40, y+i, 40, 40))
-                pygame.draw.rect(screen, ("yellow"), (x+40, y+40+i, 40, 40))
-                pygame.draw.rect(screen, ("yellow"), (x+80, y+40+i, 40, 40))
+                right = window.get_counter_right()
+                left = window.get_counter_left()
+                window.update()
+                pygame.draw.rect(screen, ("yellow"), (x+(right)-(left), y+i, 40, 40))
+                pygame.draw.rect(screen, ("yellow"), (x+40+(right)-(left), y+i, 40, 40))
+                pygame.draw.rect(screen, ("yellow"), (x+40+(right)-(left), y+40+i, 40, 40))
+                pygame.draw.rect(screen, ("yellow"), (x+80+(right)-(left), y+40+i, 40, 40))
                 time.sleep(0.05)
                 pygame.display.flip()
                 screen.fill(("black"))
