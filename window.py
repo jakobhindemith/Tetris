@@ -26,7 +26,7 @@ def draw_grid(surface):
     for x in range(0, 400, 40):  #width
         for y in range(0, 600, 40): #height
             pygame.draw.rect(surface, ("white"), (x, y, 40, 40), 1)  #Gitterlinien
-
+    
 def create_window():
     pygame.init()
     pygame.display.set_caption("Tetris")
@@ -41,8 +41,10 @@ def create_window():
     #Event-Loop
     running = True
     while running:
+        
         #starting falling tetrominos
         tetris.tetromino(screen, 80, 0)
+        print("laeuft..")
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  
                  running = False

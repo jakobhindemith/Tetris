@@ -38,10 +38,9 @@ def tetromino(screen, x, y):
                 pygame.display.flip()
                 screen.fill(("black"))
                 window.draw_grid(screen)
-                #timer dfor faling
+                #timer for faling
                 time.sleep(0.05)      
-                #moving down
-                i = i + 10  
+                i = i + 10
         case 'O':
             while i <= 520:
                 right = window.get_counter_right()
