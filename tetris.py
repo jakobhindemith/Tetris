@@ -3,97 +3,69 @@ import random
 import time
 import window
 
-#list of shapes
-shapes = ['I','O','T','L','Z']
-#test shape
-#shapes = ['I']
+GRID_WIDTH = 10
+GRID_HEIGHT = 20
+GRID_SIZE = 40
 
-#define the pricks
+#2D List of Lists
+grid = [[None for _ in range(GRID_WIDTH)] for _ in range(GRID_HEIGHT)]
+
+#Matrix
+shapes = {
+    'I': [(0,0), (0,40), (0,80), (0,120)],
+    'O': [(0,0), (0,40), (40,0), (40,40)],
+    'T': [(0,0), (40,0), (80, 0), (40, 40)],
+    'L': [(0, 0), (0,40), (0,80), (40,80)],
+    'Z': [(0, 0), (40,0), (40,40), (80,40)]
+}
+
+def can_move_down(y, shape, x_off):
+    for block_x, block_y in shape:
+        grid_x = (x_off + block_x) // GRID_SIZE
+        grid_y = (y + block_y) // GRID_SIZE + 1
+        if grid_x < 0 or grid_x >= GRID_WIDTH or grid_y >= GRID_HEIGHT:
+            return False
+        if grid[grid_y][grid_x] is not None:
+            return False
+    return True
+
+#write the tetromino 
+def place_tetromino(y, shape, x_offset, color):
+    for block_x, block_y in shape:
+        grid_x = (x_offset + block_x) // GRID_SIZE
+        grid_y = (y + block_y) // GRID_SIZE
+        if 0 <= grid_x < GRID_WIDTH and 0 <= grid_y < GRID_HEIGHT:
+            grid[grid_y][grid_x] = color
+
+
+def draw_tetromino(screen):
+    screen.fill("black")
+    for y in range(GRID_HEIGHT):
+        for x in range(GRID_WIDTH):
+            if grid[y][x]:
+                pygame.draw.rect(screen, grid[y][x], (x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE))
+    window.draw_grid(screen)
+
 def tetromino(screen, x, y):
-    #counter down
-    i = 0
-    #counter right
-    right = 0
-    #counter left
-    left = 0
     #random shape
-    shape = random.choice(shapes)
-    print(shape)   
-    #drawing the tetromino
-    match shape:
-        case 'I':
-            #until end
-            while i <= 440:
-                #get key input
-                right = window.get_counter_right()
-                left = window.get_counter_left()
-                #update key input
-                window.update()
-                #draw the falling tetromino
-                pygame.draw.rect(screen, ("green"), (x+(right)-(left), y+i, 40, 40))
-                pygame.draw.rect(screen, ("green"), (x+(right)-(left), y+40+i, 40, 40))
-                pygame.draw.rect(screen, ("green"), (x+(right)-(left), y+80+i, 40, 40))
-                pygame.draw.rect(screen, ("green"), (x+(right)-(left), y+120+i, 40, 40))
-                #show 
-                pygame.display.flip()
-                screen.fill(("black"))
-                window.draw_grid(screen)
-                #timer for faling
-                time.sleep(0.05)      
-                i = i + 10
-        case 'O':
-            while i <= 520:
-                right = window.get_counter_right()
-                left = window.get_counter_left()
-                window.update()
-                pygame.draw.rect(screen, ("orange"), (x+(right)-(left), y+i, 40, 40))
-                pygame.draw.rect(screen, ("orange"), (x+(right)-(left), y+40+i, 40, 40))
-                pygame.draw.rect(screen, ("orange"), (x+40+(right)-(left), y+i, 40, 40))
-                pygame.draw.rect(screen, ("orange"), (x+40+(right)-(left), y+40+i, 40, 40))
-                pygame.display.flip()
-                screen.fill(("black"))
-                window.draw_grid(screen)
-                time.sleep(0.05)
-                i = i + 10
-        case 'T':
-            while i <= 520:
-                right = window.get_counter_right()
-                left = window.get_counter_left()
-                window.update()
-                pygame.draw.rect(screen, ("red"), (x+(right)-(left), y+i, 40, 40))
-                pygame.draw.rect(screen, ("red"), (x+40+(right)-(left), y+i, 40, 40))
-                pygame.draw.rect(screen, ("red"), (x+80+(right)-(left), y+i, 40, 40))
-                pygame.draw.rect(screen, ("red"), (x+40+(right)-(left), y+40+i, 40, 40))
-                time.sleep(0.05)
-                pygame.display.flip()
-                screen.fill(("black"))
-                window.draw_grid(screen)
-                i = i + 10
-        case 'L':
-            while i <= 480:
-                right = window.get_counter_right()
-                left = window.get_counter_left()
-                window.update()
-                pygame.draw.rect(screen, ("blue"), (x+(right)-(left), y+i, 40, 40))
-                pygame.draw.rect(screen, ("blue"), (x+(right)-(left), y+40+i, 40, 40))
-                pygame.draw.rect(screen, ("blue"), (x+(right)-(left), y+80+i, 40, 40))
-                pygame.draw.rect(screen, ("blue"), (x+40+(right)-(left), y+80+i, 40, 40))
-                time.sleep(0.05)
-                pygame.display.flip()
-                screen.fill(("black"))
-                window.draw_grid(screen)
-                i = i + 10
-        case 'Z':
-            while i <= 520:
-                right = window.get_counter_right()
-                left = window.get_counter_left()
-                window.update()
-                pygame.draw.rect(screen, ("yellow"), (x+(right)-(left), y+i, 40, 40))
-                pygame.draw.rect(screen, ("yellow"), (x+40+(right)-(left), y+i, 40, 40))
-                pygame.draw.rect(screen, ("yellow"), (x+40+(right)-(left), y+40+i, 40, 40))
-                pygame.draw.rect(screen, ("yellow"), (x+80+(right)-(left), y+40+i, 40, 40))
-                time.sleep(0.05)
-                pygame.display.flip()
-                screen.fill(("black"))
-                window.draw_grid(screen)
-                i = i + 10
+    shape_key = random.choice(list(shapes.keys())) 
+    shape = shapes[shape_key]
+    color = random.choice(["green", "orange", "red", "blue", "yellow"])
+    right = 0
+    left = 0
+
+    #while moving down draw tetrominos
+    while can_move_down(y, shape, x):
+        right = window.get_counter_right()
+        left = window.get_counter_left()
+        window.update() #To Move Tetromino
+        y += 10
+
+        draw_tetromino(screen)
+        for block_x, block_y in shape:
+            pygame.draw.rect(screen, color, (x + right - left + block_x, y + block_y, GRID_SIZE, GRID_SIZE))
+
+        pygame.display.flip()
+        time.sleep(0.08)
+
+    place_tetromino(y, shape, x + right - left, color)
