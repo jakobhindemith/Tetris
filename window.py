@@ -5,6 +5,10 @@ import random
 counter_right = 0
 counter_left =  0
 
+GRID_WITH = 400
+GRID_LENGH = 800
+BLOCK = 40
+
 #get counter
 def get_counter_right():
     return counter_right
@@ -21,17 +25,16 @@ def inc_counter_left():
     global counter_left
     counter_left += 40
 
-
 def draw_grid(surface):
-    for x in range(0, 400, 40):  #width
-        for y in range(0, 600, 40): #height
-            pygame.draw.rect(surface, ("white"), (x, y, 40, 40), 1)  #Gitterlinien
-
+    for x in range(0, GRID_WITH, BLOCK):  #width
+        for y in range(0, GRID_LENGH, BLOCK): #height
+            pygame.draw.rect(surface, ("white"), (x, y, BLOCK, BLOCK), 1)  #Gitterlinien
+    
 def create_window():
     pygame.init()
     pygame.display.set_caption("Tetris")
     #screen size
-    screen = pygame.display.set_mode((400, 600))
+    screen = pygame.display.set_mode((GRID_WITH, GRID_LENGH))
     # Background
     screen.fill(("black"))
     draw_grid(screen)
@@ -53,10 +56,8 @@ def update():
             #reading Arowkeys
         if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RIGHT:
-                    print("Right") 
                     inc_counter_right()
                 if event.key == pygame.K_LEFT:
-                    print("Left")
                     inc_counter_left()
     
 
