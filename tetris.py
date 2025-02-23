@@ -23,6 +23,7 @@ def can_move_down(y, shape, x_off):
     for block_x, block_y in shape:
         grid_x = (x_off + block_x) // GRID_SIZE
         grid_y = (y + block_y) // GRID_SIZE + 1
+        #print("grid_x:", grid_x, " grid_y:", grid_y)
         if grid_x < 0 or grid_x >= GRID_WIDTH or grid_y >= GRID_HEIGHT:
             return False
         if grid[grid_y][grid_x] is not None:
@@ -34,9 +35,10 @@ def place_tetromino(y, shape, x_offset, color):
     for block_x, block_y in shape:
         grid_x = (x_offset + block_x) // GRID_SIZE
         grid_y = (y + block_y) // GRID_SIZE
+        #kollision?
         if 0 <= grid_x < GRID_WIDTH and 0 <= grid_y < GRID_HEIGHT:
             grid[grid_y][grid_x] = color
-
+        print("grid_x: ", grid_x, "grid_y: ", grid_y)
 
 def draw_tetromino(screen):
     screen.fill("black")
@@ -53,9 +55,8 @@ def tetromino(screen, x, y):
     color = random.choice(["green", "orange", "red", "blue", "yellow"])
     right = 0
     left = 0
-
     #while moving down draw tetrominos
-    while can_move_down(y, shape, x):
+    while can_move_down(y, shape, x + right - left):
         right = window.get_counter_right()
         left = window.get_counter_left()
         window.update() #To Move Tetromino
@@ -66,6 +67,7 @@ def tetromino(screen, x, y):
             pygame.draw.rect(screen, color, (x + right - left + block_x, y + block_y, GRID_SIZE, GRID_SIZE))
 
         pygame.display.flip()
-        time.sleep(0.08)
+        time.sleep(0.1)
 
     place_tetromino(y, shape, x + right - left, color)
+    print("place_tetromino", y, shape, x ,"+", right, "-", left, color)
