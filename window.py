@@ -4,10 +4,20 @@ import random
 
 counter_right = 0
 counter_left =  0
+count_fast = 0.0
 
 GRID_WITH = 400
 GRID_LENGH = 800
 BLOCK = 40
+
+def reset_counters():
+    global count_fast, counter_left, counter_right
+    counter_right = 0
+    counter_left =  0
+    count_fast = 0.0
+
+def get_counter_fast():
+    return count_fast
 
 #get counter
 def get_counter_right():
@@ -24,6 +34,10 @@ def inc_counter_right():
 def inc_counter_left():
     global counter_left
     counter_left += 40
+
+def counter_fast():
+    global count_fast
+    count_fast += 0.1
 
 def draw_grid(surface):
     for x in range(0, GRID_WITH, BLOCK):  #width
@@ -45,7 +59,7 @@ def create_window():
     running = True
     while running:
         #starting falling tetrominos
-        tetris.tetromino(screen, 80, 0)
+        tetris.tetromino(screen, 80, 0, 0, 0, 0.0)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  
                  running = False
@@ -59,5 +73,7 @@ def update():
                     inc_counter_right()
                 if event.key == pygame.K_LEFT:
                     inc_counter_left()
-    
-
+                #if event.key == pygame.K_UP:
+                   # tetris.rotate()
+                if event.key == pygame.K_DOWN:
+                    counter_fast()
