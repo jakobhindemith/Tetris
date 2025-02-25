@@ -1,6 +1,7 @@
 import pygame
 import tetris
 import random
+import time
 
 counter_right = 0
 counter_left =  0
@@ -58,12 +59,13 @@ def create_window():
     #Event-Loop
     running = True
     while running:
-        #starting falling tetrominos
         tetris.tetromino(screen, 80, 0, 0, 0, 0.0)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:  
-                 running = False
+        update()
 
+#stop the game
+def stop():
+    time.sleep(10000)
+             
 def update():
     #keyboard events
     for event in pygame.event.get():
@@ -77,3 +79,12 @@ def update():
                    # tetris.rotate()
                 if event.key == pygame.K_DOWN:
                     counter_fast()
+                if event.key == pygame.K_ESCAPE:
+                    stop()
+        elif event.type == pygame.QUIT:
+              pygame.quit()
+              exit()
+
+                
+
+
