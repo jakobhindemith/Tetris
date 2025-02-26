@@ -17,17 +17,17 @@ def reset_counters():
     counter_left =  0
     count_fast = 0.0
 
+#get counter
 def get_counter_fast():
     return count_fast
 
-#get counter
 def get_counter_right():
     return counter_right
 
 def get_counter_left():
     return counter_left
 
-#inc right key
+#inc key action
 def inc_counter_right():
     global counter_right
     counter_right +=40
@@ -41,9 +41,9 @@ def counter_fast():
     count_fast += 0.1
 
 def draw_grid(surface):
-    for x in range(0, GRID_WITH, BLOCK):  #width
-        for y in range(0, GRID_LENGH, BLOCK): #height
-            pygame.draw.rect(surface, ("white"), (x, y, BLOCK, BLOCK), 1)  #Gitterlinien
+    for x in range(0, GRID_WITH, BLOCK):
+        for y in range(0, GRID_LENGH, BLOCK):
+            pygame.draw.rect(surface, ("white"), (x, y, BLOCK, BLOCK), 1)
     
 def create_window():
     pygame.init()
@@ -56,13 +56,13 @@ def create_window():
     #set display
     pygame.display.flip()
 
-    #Event-Loop
+    #Game-Loop
     running = True
     while running:
         tetris.tetromino(screen, 80, 0, 0, 0, 0.0)
         update()
 
-#stop the game
+#stop the game -> esc
 def stop():
     time.sleep(10000)
              
@@ -75,7 +75,7 @@ def update():
                     inc_counter_right()
                 if event.key == pygame.K_LEFT:
                     inc_counter_left()
-                #if event.key == pygame.K_UP:
+                #if event.key == pygame.K_UP: #to rotate tetrominos
                    # tetris.rotate()
                 if event.key == pygame.K_DOWN:
                     counter_fast()
@@ -84,7 +84,3 @@ def update():
         elif event.type == pygame.QUIT:
               pygame.quit()
               exit()
-
-                
-
-

@@ -3,26 +3,24 @@ import random
 import time
 import window
 
+#grid size
 GRID_WIDTH = 10
 GRID_HEIGHT = 20
 GRID_SIZE = 40
-
-left = 0
-right = 0
-fast = 0.0
 
 #2D List of Lists
 grid = [[None for _ in range(GRID_WIDTH)] for _ in range(GRID_HEIGHT)]
 
 #Matrix
 shapes = {
-    #'I': [(0,0), (0,40), (0,80), (0,120)],
+    'I': [(0,0), (0,40), (0,80), (0,120)],
     'O': [(0,0), (0,40), (40,0), (40,40)],
-    #'T': [(0,0), (40,0), (80, 0), (40, 40)],
-    #'L': [(0, 0), (0,40), (0,80), (40,80)],
-    #'Z': [(0, 0), (40,0), (40,40), (80,40)]
+    'T': [(0,0), (40,0), (80, 0), (40, 40)],
+    'L': [(0,0), (0,40), (0,80), (40,80)],
+    'LL':[(0,0), (0,40), (0,80), (-40,80)],
+    'Z': [(0,0), (40,0), (40,40), (80,40)]
 }
-
+#Stacking
 def can_move_down(y, shape, x_off):
     for block_x, block_y in shape:
         grid_x = (x_off + block_x) // GRID_SIZE
@@ -34,7 +32,7 @@ def can_move_down(y, shape, x_off):
             return False
     return True
 
-#write the tetromino 
+#write the tetromino to the grid
 def place_tetromino(y, shape, x_offset, color):
     for block_x, block_y in shape:
         grid_x = (x_offset + block_x) // GRID_SIZE
@@ -51,18 +49,18 @@ def draw_tetromino(screen):
                 pygame.draw.rect(screen, grid[y][x], (x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE))
     window.draw_grid(screen)
 
-#detects if row 20 is full and clears it
-def row(screen):
-    counter = 0
-    for x in grid[19]:
-        print(x)
-        if x is not None:
-            counter += 1
-            if counter == 10:
-                print("full row")
-                for y in range(1):
-                    for x in range(10):
-                        grid[19][x] = None
+def clear_rows():
+    global grid
+    #empty gamefield
+    new_grid = [[None for _ in range(GRID_WIDTH)] for _ in range(GRID_HEIGHT)]
+    new_row = GRID_HEIGHT - 1
+    #iterate through gamefield
+    for x in range(GRID_HEIGHT - 1, -1, -1):
+        if None in grid[x]:
+            #copy new grid
+            new_grid[new_row] = grid[x]
+            new_row -= 1
+    grid = new_grid
                         
 def tetromino(screen, x, y, left, right, fast):
     #random shape
@@ -83,7 +81,8 @@ def tetromino(screen, x, y, left, right, fast):
 
         pygame.display.flip()
         time.sleep(0.1 - fast)
-        row(screen)
+        #row(screen)
+        clear_rows()
 
     place_tetromino(y, shape, x + right - left, color)
     #after every round(falling tetromino) the counter is set back to 0
