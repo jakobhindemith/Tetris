@@ -75,8 +75,8 @@ def update():
                     inc_counter_right()
                 if event.key == pygame.K_LEFT:
                     inc_counter_left()
-                #if event.key == pygame.K_UP: #to rotate tetrominos
-                   # tetris.rotate()
+                if event.key == pygame.K_UP:
+                    tetris.rotate()
                 if event.key == pygame.K_DOWN:
                     counter_fast()
                 if event.key == pygame.K_ESCAPE:
