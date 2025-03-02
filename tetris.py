@@ -8,17 +8,31 @@ GRID_WIDTH = 10
 GRID_HEIGHT = 20
 GRID_SIZE = 40
 
+shape_key = ""
+shape = []
+
 #2D List of Lists
 grid = [[None for _ in range(GRID_WIDTH)] for _ in range(GRID_HEIGHT)]
 
 #Matrix
 shapes = {
-    'I': [(0,0), (0,40), (0,80), (0,120)],
-    'O': [(0,0), (0,40), (40,0), (40,40)],
-    'T': [(0,0), (40,0), (80, 0), (40, 40)],
+    #'I': [(0,0), (0,40), (0,80), (0,120)],
+    #'O': [(0,0), (0,40), (40,0), (40,40)],
+    #'T': [(0,0), (40,0), (80, 0), (40, 40)],
     'L': [(0,0), (0,40), (0,80), (40,80)],
-    'LL':[(0,0), (0,40), (0,80), (-40,80)],
-    'Z': [(0,0), (40,0), (40,40), (80,40)]
+    'L-':[(0,0), (0,40), (0,80), (-40,80)],
+    #'Z': [(0,0), (40,0), (40,40), (80,40)]
+    
+    #'-':  [(0,0), (40,0), (80,0), (120,0)],
+
+    #'TT': [(0,0), (0,40), (40,40), (0,80)],
+    #'TTT': [(0,0), (40,0), (40,-40), (80,0)],
+    #'TTTT': [(0,0), (0,40), (-40,40), (0,80)],
+
+    
+    'LL': [(0,0), (40,0), (0,40), (80,0)]
+
+
 }
 #Stacking
 def can_move_down(y, shape, x_off):
@@ -61,18 +75,20 @@ def clear_rows():
             new_grid[new_row] = grid[x]
             new_row -= 1
     grid = new_grid
-                        
+       
 def tetromino(screen, x, y, left, right, fast):
-    #random shape
+    global shape_key
+    global shape
     shape_key = random.choice(list(shapes.keys())) 
+    print("shape_key", shape_key)
     shape = shapes[shape_key]
+    print("shape", shape)
     color = random.choice(["green", "orange", "red", "blue", "yellow"])
-    #while moving down draw tetrominos
     while can_move_down(y, shape, x + right - left):
         right = window.get_counter_right()
         left = window.get_counter_left()
         fast = window.get_counter_fast()
-        window.update() #To Move Tetromino
+        window.update()
         y += 10
 
         draw_tetromino(screen)
@@ -81,10 +97,44 @@ def tetromino(screen, x, y, left, right, fast):
 
         pygame.display.flip()
         time.sleep(0.1 - fast)
-        #row(screen)
         clear_rows()
 
     place_tetromino(y, shape, x + right - left, color)
-    #after every round(falling tetromino) the counter is set back to 0
     window.reset_counters()
     print("place_tetromino", y, shape, x ,"+", right, "-", left, color)
+    
+def rotate():
+    global shape_key
+    global shape
+
+    if shape_key == 'I':
+        shape =  [(0,0), (40,0), (80,0), (120,0)]
+        shape_key = '-'
+    elif shape_key == '-':
+        shape = [(0,0), (0,40), (0,80), (0,120)]
+        shape_key = 'I'
+    
+    if shape_key == 'T':
+        shape = [(0,0), (0,40), (40,40), (0,80)]
+        shape_key = 'TT'
+    elif shape_key == 'TT':
+        shape = [(0,0), (40,0), (40,-40), (80,0)]
+        shape_key = 'TTT'
+    elif shape_key == 'TTT':
+        shape = [(0,0), (0,40), (-40,40), (0,80)]
+        shape_key = 'TTTT'
+    elif shape_key == 'TTTT':
+        shape = [(0,0), (40,0), (80, 0), (40, 40)] 
+        shape_key = 'T'
+
+    if shape_key == 'L':
+        shape = [(0,0), (40,0), (0,40), (80,0)]
+        shape_key == 'LL'
+    elif shape_key == 'LL':
+        shape = [(0,0), (0,40), (0,80), (-40,0)]
+        shape_key == 'LLL'
+       
+
+
+
+
