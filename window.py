@@ -38,7 +38,7 @@ def inc_counter_left():
 
 def counter_fast():
     global count_fast
-    count_fast += 0.1
+    count_fast = 0.1
 
 def draw_grid(surface):
     for x in range(0, GRID_WITH, BLOCK):
@@ -64,7 +64,10 @@ def create_window():
 
 #stop the game -> esc
 def stop():
-    time.sleep(10000)
+    for event in pygame.event.get():
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                stop()
              
 def update():
     #keyboard events

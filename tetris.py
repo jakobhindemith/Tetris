@@ -16,24 +16,32 @@ grid = [[None for _ in range(GRID_WIDTH)] for _ in range(GRID_HEIGHT)]
 
 #Matrix
 shapes = {
-    #'I': [(0,0), (0,40), (0,80), (0,120)],
-    #'O': [(0,0), (0,40), (40,0), (40,40)],
-    #'T': [(0,0), (40,0), (80, 0), (40, 40)],
+    #main tetrominos
+    'I': [(0,0), (0,40), (0,80), (0,120)],
+    'O': [(0,0), (0,40), (40,0), (40,40)],
+    'T': [(0,0), (40,0), (80, 0), (40, 40)],
     'L': [(0,0), (0,40), (0,80), (40,80)],
-    'L-':[(0,0), (0,40), (0,80), (-40,80)],
-    #'Z': [(0,0), (40,0), (40,40), (80,40)]
-    
-    #'-':  [(0,0), (40,0), (80,0), (120,0)],
+    'Z': [(0,0), (40,0), (40,40), (80,40)],
 
-    #'TT': [(0,0), (0,40), (40,40), (0,80)],
-    #'TTT': [(0,0), (40,0), (40,-40), (80,0)],
-    #'TTTT': [(0,0), (0,40), (-40,40), (0,80)],
+    #diffrend positions
+    '-':  [(0,0), (40,0), (80,0), (120,0)],
+    'TT': [(0,0), (0,40), (40,40), (0,80)],
+    'TTT': [(0,0), (40,0), (40,-40), (80,0)],
+    'TTTT': [(0,0), (0,40), (-40,40), (0,80)],
+    'LL': [(0,0), (40,0), (0,40), (80,0)],
+    'LLL': [(0,0), (0,40), (0,80), (-40,0)],
+    'LLLL': [(0,0), (40,0), (0,-40), (80,0)],
+    'ZZ':[(40,0), (40,40), (0,40), (0,80)],
 
-    
-    'LL': [(0,0), (40,0), (0,40), (80,0)]
-
-
+    #mirrored 
+    '-L':[(0,0), (0,40), (0,80), (-40,80)],
+    '-LL':[(0,0), (-40,0), (0,40), (-80,0)],
+    '-LLL':[(0,0), (0,40), (0,80), (40,0)],
+    '-LLLL':[(0,0), (40,0), (0,-40), (80,0)],
+    '-Z': [(0,40), (40,40), (40,0), (80,0)],
+    '-ZZ': [(0,0), (0,40), (40,40), (40,80)]
 }
+
 #Stacking
 def can_move_down(y, shape, x_off):
     for block_x, block_y in shape:
@@ -75,7 +83,7 @@ def clear_rows():
             new_grid[new_row] = grid[x]
             new_row -= 1
     grid = new_grid
-       
+
 def tetromino(screen, x, y, left, right, fast):
     global shape_key
     global shape
@@ -98,6 +106,7 @@ def tetromino(screen, x, y, left, right, fast):
         pygame.display.flip()
         time.sleep(0.1 - fast)
         clear_rows()
+        #window.stop()
 
     place_tetromino(y, shape, x + right - left, color)
     window.reset_counters()
@@ -129,12 +138,44 @@ def rotate():
 
     if shape_key == 'L':
         shape = [(0,0), (40,0), (0,40), (80,0)]
-        shape_key == 'LL'
+        shape_key = 'LL'
     elif shape_key == 'LL':
         shape = [(0,0), (0,40), (0,80), (-40,0)]
-        shape_key == 'LLL'
-       
+        shape_key = 'LLL'
+    elif shape_key == 'LLL':
+        shape = [(0,0), (40,0), (0,-40), (80,0)]
+        shape_key = 'LLLL'
+    elif shape_key == 'LLLL':
+        shape = [(0,0), (0,40), (0,80), (40,80)]
+        shape_key = 'L'
 
+    if shape_key == '-L':
+        shape = [(0,0), (-40,0), (0,40), (-80,0)]
+        shape_key = '-LL'  
+    elif shape_key == '-LL':
+        shape = [(0,0), (0,40), (0,80), (40,0)]
+        shape_key = '-LLL'  
+    elif shape_key == '-LLL':
+        shape = [(0,0), (-40,0), (0,-40), (-80,0)]
+        shape_key = '-LLLL'  
+    elif shape_key == '-LLLL':
+        shape = [(0,0), (0,40), (0,80), (-40,80)]
+        shape_key = '-L'
+
+    if shape_key == 'Z':
+       shape = [(40,0), (40,40), (0,40), (0,80)]
+       shape_key = 'ZZ'
+    elif shape_key == 'ZZ':
+       shape = [(0,0), (40,0), (40,40), (80,40)]
+       shape_key = 'Z'
+
+    if shape_key == '-Z':
+        shape = [(0,0), (0,40), (40,40), (40,80)]
+        shape_key = '-ZZ'
+    elif shape_key == '-ZZ':
+        shape = [(0,40), (40,40), (40,0), (80,0)]
+        shape_key = '-Z'
+    
 
 
 
