@@ -23,3 +23,14 @@ A simple fun Tetris game built entirely with Python and Pygame.
 <div align="center">
     <img src="https://github.com/user-attachments/assets/3920aaa9-39b3-4362-a1b7-2f0b4fb18b3b"         alt="Tetris Screenshot" width="350" height="600"/>
 </div>
+
+
+Requirements
+
+    - Python 3.x
+    - pygame
+
+Run
+
+    pip install pygame
+    python main.py
