@@ -1,6 +1,6 @@
 # 🎮 Tetris (Pygame Edition)
 
-A simple yet fun Tetris game built entirely with Python and Pygame.
+A simple fun Tetris game built entirely with Python and Pygame.
 
 🧱 This project was implemented by myself as a programming exercise. It features falling tetrominos, basic keyboard controls, and real-time rendering. The game logic and drawing are fully handled with Pygame and custom logic.
 
