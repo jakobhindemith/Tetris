@@ -1,4 +1,4 @@
-# 🎮 Tetris (Pygame Edition)
+# 🎮 Tetris (Pygame Edition) 
 
 A simple fun Tetris game built entirely with Python and Pygame.
 
@@ -10,14 +10,17 @@ A simple fun Tetris game built entirely with Python and Pygame.
     - Grid-based rendering
     - Modular code structure
 
-🕹️ Controls
+## Problems
+
+    - collision detection
+    - I-shape is not centered 
+    - ...
+
+## 🕹️ Controls
 
     ⬅️ Left Arrow – Move tetromino left
-
     ➡️ Right Arrow – Move tetromino right
-
     ⬆️ Up Arrow - Turn tetromino
-
     ⬇️ Down - Arrow increases falling speed
     
 <div align="center">
@@ -25,9 +28,9 @@ A simple fun Tetris game built entirely with Python and Pygame.
 </div>
 
 
-Requirements
+## Requirements
 
-    - Python 3.x
+    - Python 3
     - pygame
 
 Run
