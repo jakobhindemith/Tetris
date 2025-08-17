@@ -13,7 +13,6 @@ A simple fun Tetris game built entirely with Python and Pygame.
 ## Problems
 
     - collision detection
-    - I-shape is not centered 
     - ...
 
 ## 🕹️ Controls
