@@ -23,7 +23,7 @@ A simple fun Tetris game built entirely with Python and Pygame.
     ⬇️ Down - Arrow increases falling speed
     
 <div align="center">
-    <img src="https://github.com/user-attachments/assets/3920aaa9-39b3-4362-a1b7-2f0b4fb18b3b"         alt="Tetris Screenshot" width="350" height="600"/>
+    <img width="200" height="800" alt="grafik" src="https://github.com/user-attachments/assets/711cca9a-c2f2-49e8-ba54-67b865cd8429" />
 </div>
 
 
