@@ -32,7 +32,7 @@ A simple fun Tetris game built entirely with Python and Pygame.
     - Python 3
     - pygame
 
-Run
+## Run
 
     pip install pygame
     python main.py
