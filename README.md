@@ -17,20 +17,23 @@ This project was implemented by myself as a programming exercise. It features fa
 
 ## Controls
 
-⬅️ Left Arrow – Move tetromino left
-➡️ Right Arrow – Move tetromino right
-⬆️ Up Arrow - Turn tetromino
-⬇️ Down - Arrow increases falling speed
+- ⬅️ Left Arrow – Move tetromino left
+- ➡️ Right Arrow – Move tetromino right
+- ⬆️ Up Arrow - Turn tetromino
+- ⬇️ Down - Arrow increases falling speed
     
 <div align="center">
     <img width="300" height="750" alt="grafik" src="https://github.com/user-attachments/assets/711cca9a-c2f2-49e8-ba54-67b865cd8429" />
 </div>
 
 ## Run
+if python and pygame isnt installed:
 
-pip install python3 / apt install python3 (if python in not installed)
-pip install pygame / apt install pygame (-"-)
+      apt install python3 
+      apt install pygame
 
-git clone https://github.com/jakobhindemith/Tetris.git
-cd Tetris
-python main.py
+To Download the Project:
+    
+    git clone https://github.com/jakobhindemith/Tetris.git
+    cd Tetris
+    python main.py
