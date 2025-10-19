@@ -2,20 +2,20 @@
 
 A simple fun Tetris game built entirely with Python and Pygame.
 
-🧱 This project was implemented by myself as a programming exercise. It features falling tetrominos, basic keyboard controls, and real-time rendering. The game logic and drawing are fully handled with Pygame and custom logic.
+This project was implemented by myself as a programming exercise. It features falling tetrominos, basic keyboard controls, and real-time rendering. The game logic and drawing are fully handled with Pygame and custom logic.
 
     - Classic Tetris shapes: I, O, T, L, Z
     - Real-time keyboard control using arrow keys
     - Dynamic block movement and animation
     - Grid-based rendering
-    - Modular code structure
+    - "Modular" code structure ;)
 
 ## Problems
 
-    - collision detection
+    - collision detection (still a bit buggy)
     - ...
 
-## 🕹️ Controls
+## Controls
 
     ⬅️ Left Arrow – Move tetromino left
     ➡️ Right Arrow – Move tetromino right
@@ -26,13 +26,11 @@ A simple fun Tetris game built entirely with Python and Pygame.
     <img width="300" height="750" alt="grafik" src="https://github.com/user-attachments/assets/711cca9a-c2f2-49e8-ba54-67b865cd8429" />
 </div>
 
-
-## Requirements
-
-    - Python 3
-    - pygame
-
 ## Run
 
-    pip install pygame
+    pip install python3 / apt install python3 (if python in not installed)
+    pip install pygame / apt install pygame (-"-)
+
+    git clone https://github.com/jakobhindemith/Tetris.git
+    cd Tetris
     python main.py
